@@ -5,21 +5,21 @@ import java.io.IOException
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
-//    println("Введіть текст:")
-//    var text = readln();
-//    var result = ""
-//    var count = 0
-//
-//    for (i in text) {
-//        if (i == 'і') {
-//            result = result + "1"
-//            count++
-//        } else {
-//            result += i
-//        }
-//    }
-//    println("Результат: " + result)
-//    println("Кількість замін: "+ count)
+    println("Введіть текст:")
+    var text = readln();
+    var result = ""
+    var count = 0
+
+    for (i in text) {
+        if (i == 'і') {
+            result = result + "1"
+            count++
+        } else {
+            result += i
+        }
+    }
+    println("Результат: " + result)
+    println("Кількість замін: "+ count)
 
     try {
         val text = File("D:\\NAU\\Kotlin\\Lab2\\src\\input.txt").readText()

@@ -1,53 +1,88 @@
-import kotlin.math.pow
+// Порівняння чисел
+fun maxNumber(firstNum: Int, secondNum: Int): Int {
+    return if (firstNum > secondNum) firstNum else secondNum
+}
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+// Ділення через віднімання
+fun divide(dividend: Int, divisor: Int): Pair<Int, Int> {
+    var quotient = 0
+    var remainder = dividend
+    while (remainder >= divisor) {
+        remainder -= divisor
+        quotient++
+    }
+    return Pair(quotient, remainder)
+}
+
+// Множення через додавання
+fun multiply(firstMultiplier: Int, secondMultiplier: Int): Int {
+    var product = 0
+    for (i in 1..secondMultiplier) {
+        product += firstMultiplier
+    }
+    return product
+}
+
+// Сума ряду без вбудованих степенів
+fun seriesSum(amountLimit: Int): List<Double> {
+    val sumList = mutableListOf<Double>()
+    var sum = 0.0
+
+    for (i in 1..amountLimit) {
+        // Факторіал
+        var factorial = 1.0
+        for (j in 1..i) {
+            factorial *= j
+        }
+
+        // 3^i вручну
+        var power3 = 1.0
+        for (k in 1..i) {
+            power3 *= 3
+        }
+
+        // i^i вручну
+        var powerI = 1.0
+        for (k in 1..i) {
+            powerI *= i
+        }
+
+        sum += power3 * factorial / powerI
+        sumList.add(sum)
+    }
+
+    return sumList
+}
+
 fun main() {
     // Порівняння
     print("Введіть перше число: ")
-    var firstNum = readln().toInt();
+    val firstNum = readln().toInt()
     print("Введіть друге число: ")
-    var secondNum = readln().toInt();
-    if (firstNum > secondNum) {
-        println("Більше число: " + firstNum)
-    } else{
-        println("Більше число: " + secondNum)
-    }
+    val secondNum = readln().toInt()
+    println("Більше число: ${maxNumber(firstNum, secondNum)}")
 
-    // Ділення через операцію віднімання
+    // Ділення
     print("Введіть ділене: ")
-    var dividend = readln().toInt();
+    val dividend = readln().toInt()
     print("Введіть дільник: ")
-    var divisor = readln().toInt();
-    var quotient = 0;
-    while (dividend >= divisor) {
-        dividend = dividend - divisor;
-        quotient++;
-    }
-    println("Частка: " + quotient);
-    if(dividend != 0 ){
-        println("Остача: " + dividend);
-    }
+    val divisor = readln().toInt()
+    val (quotient, remainder) = divide(dividend, divisor)
+    println("Частка: $quotient")
+    if (remainder != 0) println("Остача: $remainder")
 
-    // множення через операцію додавання,
+    // Множення
     print("Введіть перший множник: ")
-    var firstMultiplier = readln().toInt();
+    val firstMultiplier = readln().toInt()
     print("Введіть другий множник: ")
-    var secondMultiplier = readln().toInt();
-    var product = 0;
-    for (i in 1..secondMultiplier) {
-        product += firstMultiplier;
-    }
-    println("Добуток: " + product);
+    val secondMultiplier = readln().toInt()
+    println("Добуток: ${multiply(firstMultiplier, secondMultiplier)}")
 
-    // сума ряду
+    // Сума ряду
     print("Введіть верхню межу суми: ")
-    var amountLimit = readln().toInt()
-    var sum = 0.0;
-    var factorial = 1.0
-    for(i in 1..amountLimit) {
-        factorial *= i
-        sum += (3.0.pow(i.toDouble()) * factorial / i.toDouble().pow(i.toDouble()))
-        println("Ітерація №" + i + ": " + sum)
+    val amountLimit = readln().toInt()
+    val sumList = seriesSum(amountLimit)
+    for ((i, value) in sumList.withIndex()) {
+        println("Ітерація №${i + 1}: $value")
     }
 }
